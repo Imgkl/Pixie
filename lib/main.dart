@@ -1,32 +1,23 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pixie/sucess.dart';
+import 'package:pixie/error.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pixie',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+void main() async {
+  bool result = await DataConnectionChecker().hasConnection;
+  if (result == true) {
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
       ),
-      home: MyHomePage(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
+    runApp(MyApp());
+  } else {
+    runApp(Error());
   }
 }
