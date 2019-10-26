@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:pixie/Screens/imageScreen.dart';
 
 class ResultPage extends StatefulWidget {
- final String category;
+  final String category;
   ResultPage({this.category});
   @override
   _ResultPageState createState() => _ResultPageState();
@@ -80,7 +80,8 @@ class _ResultPageState extends State<ResultPage> {
                             builder: (context) => ImageScreen(
                                 data: snapshot.data,
                                 index: index,
-                                fullHDURL: data['hits'][index]['fullHDURL'],
+                                largeImageURL: data['hits'][index]
+                                    ['largeImageURL'],
                                 user: data['hits'][index]['user'],
                                 views: data['hits'][index]['views'],
                                 downloads: data['hits'][index]['downloads'],

@@ -1,12 +1,14 @@
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ImageScreen extends StatefulWidget {
   final image;
   final data;
-  final fullHDURL;
+  final largeImageURL;
   final int views;
   final String user;
   final int downloads;
@@ -22,7 +24,7 @@ class ImageScreen extends StatefulWidget {
       this.downloads,
       this.views,
       this.user,
-      this.fullHDURL})
+      this.largeImageURL})
       : super(key: key);
   @override
   _ImageScreenState createState() => _ImageScreenState();
@@ -31,6 +33,7 @@ class ImageScreen extends StatefulWidget {
 class _ImageScreenState extends State<ImageScreen> {
   @override
   Widget build(BuildContext context) {
+    Future<File> _imageFile;
     final screenHeight = MediaQuery.of(context).size.height;
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
@@ -42,68 +45,69 @@ class _ImageScreenState extends State<ImageScreen> {
     }
 
     return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.white,
-      body: ConnectivityWidgetWrapper(
-        disableInteraction: true,
-        child: Stack(
-          children: <Widget>[
-            Hero(
-              tag: widget.index,
-              child: CachedNetworkImage(
-                imageUrl: widget.imageURL,
-                fit: BoxFit.cover,
-                height: double.infinity,
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: screenHeight * 0.06,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // key: _scaffoldKey,
+        backgroundColor: Colors.white,
+        body: ConnectivityWidgetWrapper(
+          disableInteraction: true,
+          child: Stack(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.eye),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(widget.views.toString()),
-                ],
+              Hero(
+                tag: widget.index,
+                child: CachedNetworkImage(
+                  imageUrl: widget.imageURL,
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.download),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(widget.downloads.toString()),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.idBadge),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(widget.user),
-                ],
-              )
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: screenHeight * 0.06,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.eye),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(widget.views.toString()),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.download),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(widget.downloads.toString()),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.idBadge),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(widget.user),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           child: Icon(
             FontAwesomeIcons.arrowAltCircleDown,
             color: Colors.black,
           ),
           // TODO: Download function
-          onPressed: () => _showSnack()),
-    );
+          onPressed: () =  _showSnack();
+          
+        ));
   }
 }

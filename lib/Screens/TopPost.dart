@@ -12,11 +12,13 @@ class TopPost extends StatefulWidget {
 }
 
 class _TopPostState extends State<TopPost> {
+ 
+
   @override
   Widget build(BuildContext context) {
     final String url =
-        "https://pixabay.com/api/?key=13633104-95fec859d1f7f7690d43e6ce9&editors_choice=true&" +
-            "pretty=true&per_page=200&orientation=vertical&colors=grayscale&safesearch=true&imagetype=photo";
+        "https://pixabay.com/api/?key=13633104-95fec859d1f7f7690d43e6ce9&editors_choice=true" +
+            "&pretty=true&per_page=200&orientation=vertical&colors=grayscale&safesearch=true&imagetype=photo";
 
     Future<Map> getImages() async {
       try {
@@ -72,7 +74,8 @@ class _TopPostState extends State<TopPost> {
                           builder: (context) => ImageScreen(
                               data: snapshot.data,
                               index: index,
-                              fullHDURL: data['hits'][index]['fullHDURL'],
+                              largeImageURL: data['hits'][index]
+                                  ['largeImageURL '],
                               user: data['hits'][index]['user'],
                               views: data['hits'][index]['views'],
                               downloads: data['hits'][index]['downloads'],
