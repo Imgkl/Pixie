@@ -106,7 +106,7 @@ class _ImageScreenState extends State<ImageScreen> {
             color: Colors.black,
           ),
           // TODO: Download function
-          onPressed: () =  _showSnack();
+          onPressed: () =>  _showSnack(),
           
         ));
   }
