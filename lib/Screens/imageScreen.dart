@@ -32,8 +32,17 @@ class _ImageScreenState extends State<ImageScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+    _showSnack() {
+      final snackBar = SnackBar(
+        content: Text("Will be implemented soon"),
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
+    }
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       body: ConnectivityWidgetWrapper(
         disableInteraction: true,
@@ -88,14 +97,13 @@ class _ImageScreenState extends State<ImageScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        child: Icon(
-          FontAwesomeIcons.arrowAltCircleDown,
-          color: Colors.black,
-        ),
-        // TODO: Download function
-        onPressed: () => null,
-      ),
+          backgroundColor: Colors.white,
+          child: Icon(
+            FontAwesomeIcons.arrowAltCircleDown,
+            color: Colors.black,
+          ),
+          // TODO: Download function
+          onPressed: () => _showSnack()),
     );
   }
 }
