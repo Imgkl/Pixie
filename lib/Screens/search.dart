@@ -9,9 +9,9 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _name;
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     TextEditingController controllerText = TextEditingController();
     return Center(
       child: Padding(
@@ -36,10 +36,9 @@ class _SearchState extends State<Search> {
                     contentPadding: EdgeInsets.only(
                         left: 20, top: 15, right: 20, bottom: 15)),
                 controller: controllerText,
-                onSaved: (value) => _name = value,
               ),
               SizedBox(
-                height: 30,
+                height: screenHeight * 0.03,
               ),
               Material(
                 child: RaisedButton(
