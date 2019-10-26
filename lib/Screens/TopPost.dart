@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:pixie/Screens/imageScreen.dart';
@@ -15,14 +16,20 @@ class _TopPostState extends State<TopPost> {
   @override
   Widget build(BuildContext context) {
     final String url =
-        "https://pixabay.com/api/?key=13633104-95fec859d1f7f7690d43e6ce9&editors_choice=true&pretty=true&per_page=100&orientation=vertical";
+        "https://pixabay.com/api/?key=13633104-95fec859d1f7f7690d43e6ce9&editors_choice=true&" +
+            "pretty=true&per_page=200&orientation=vertical&colors=grayscale&safesearch=true&imagetype=photo";
 
     Future<Map> getImages() async {
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        return json.decode(response.body);
-      } else {
-        throw Exception("error");
+      try {
+        var response = await http.get(url);
+
+        if (response.statusCode == 200) {
+          return json.decode(response.body);
+        } else {
+          throw Exception("error");
+        }
+      } catch (e) {
+        print(e);
       }
     }
 
@@ -49,6 +56,10 @@ class _TopPostState extends State<TopPost> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: CachedNetworkImage(
+                        placeholder: (context, index) => SpinKitRipple(
+                          size: 50,
+                          color: Colors.black,
+                        ),
                         imageUrl: data['hits'][index]['largeImageURL'],
                         fit: BoxFit.cover,
                       ),
@@ -62,6 +73,7 @@ class _TopPostState extends State<TopPost> {
                           builder: (context) => ImageScreen(
                               data: snapshot.data,
                               index: index,
+                              fullHDURL: data['hits'][index]['fullHDURL'],
                               user: data['hits'][index]['user'],
                               views: data['hits'][index]['views'],
                               downloads: data['hits'][index]['downloads'],
