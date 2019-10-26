@@ -45,7 +45,7 @@ class _ImageScreenState extends State<ImageScreen> {
     }
 
     return Scaffold(
-        // key: _scaffoldKey,
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         body: ConnectivityWidgetWrapper(
           disableInteraction: true,
