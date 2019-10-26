@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pixie/homepaper.dart';
+import 'package:pixie/Screens/TopPost.dart';
+import 'package:pixie/Screens/search.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -28,12 +29,49 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    PageController controller = PageController(initialPage: 0);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text("Pixie"),
       ),
-      body: HomePaper(),
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: controller,
+        children: <Widget>[
+          TopPost(),
+          Search(),
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 10,
+        child: Container(
+          color: Colors.white30,
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              MaterialButton(
+                child: Icon(Icons.image),
+                onPressed: () {
+                  setState(() {
+                    controller.jumpToPage(0);
+                  });
+                },
+              ),
+              VerticalDivider(),
+              MaterialButton(
+                child: Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    controller.jumpToPage(1);
+                  });
+                },
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
