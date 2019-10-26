@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pixie/Screens/TopPost.dart';
 import 'package:pixie/Screens/search.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,6 +34,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: new SplashScreen(
+        seconds: 3,
+        navigateAfterSeconds: new AfterSplash(),
+        title: new Text(
+          'Pixie',
+          style: new TextStyle(
+              fontFamily: "desc", fontWeight: FontWeight.bold, fontSize: 50.0),
+        ),
+        image: new Image.asset("assets/splash.png"),
+        backgroundColor: Colors.white,
+        
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+      ),
+    );
+  }
+}
+
+class AfterSplash extends StatefulWidget {
+  @override
+  _AfterSplashState createState() => _AfterSplashState();
+}
+
+class _AfterSplashState extends State<AfterSplash> {
   @override
   Widget build(BuildContext context) {
     PageController controller = PageController(initialPage: 0);

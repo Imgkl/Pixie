@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:pixie/Screens/imageScreen.dart';
 
 class ResultPage extends StatefulWidget {
-  String category;
+ final String category;
   ResultPage({this.category});
   @override
   _ResultPageState createState() => _ResultPageState();

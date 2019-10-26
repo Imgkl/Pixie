@@ -85,7 +85,7 @@ class _TopPostState extends State<TopPost> {
             crossAxisSpacing: 4.0,
           );
         }
-        return Center(child: CircularProgressIndicator());
+        return Center(child: SpinKitRipple());
       },
     );
   }
