@@ -2,7 +2,7 @@
 
 # Description
 
-### Black and white is mix of toughest simplicity and easiest complexity
+### "Black and white is mix of toughest simplicity and easiest complexity"
 
 A Flutter application which uses Pixabay API to show images.
 
