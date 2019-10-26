@@ -21,7 +21,7 @@ class _SucessState extends State<Sucess> {
         centerTitle: true,
         title: Text(
           "Pixie",
-          style: TextStyle(fontFamily: "desc", fontSize: 35),
+          style: TextStyle(fontFamily: "desc", fontSize: 30),
         ),
         actions: <Widget>[
           Padding(

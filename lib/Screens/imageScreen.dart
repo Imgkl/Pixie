@@ -34,7 +34,7 @@ class _ImageScreenState extends State<ImageScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: ConnectivityWidgetWrapper(
         disableInteraction: true,
         child: Stack(
