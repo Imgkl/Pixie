@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ImageScreen extends StatefulWidget {
@@ -54,6 +55,10 @@ class _ImageScreenState extends State<ImageScreen> {
               Hero(
                 tag: widget.index,
                 child: CachedNetworkImage(
+                  placeholder: (context, index) => SpinKitRipple(
+                          size: 50,
+                          color: Colors.black,
+                        ),
                   imageUrl: widget.imageURL,
                   fit: BoxFit.cover,
                   height: double.infinity,

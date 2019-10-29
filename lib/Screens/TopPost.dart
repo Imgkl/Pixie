@@ -12,7 +12,7 @@ class TopPost extends StatefulWidget {
 }
 
 class _TopPostState extends State<TopPost> {
- 
+  get index => index;
 
   @override
   Widget build(BuildContext context) {

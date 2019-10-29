@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pixie/Screens/TopPost.dart';
 import 'package:pixie/Screens/search.dart';
+import 'package:pixie/Screens/tryout1.dart';
 
 class Sucess extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class _SucessState extends State<Sucess> {
           physics: NeverScrollableScrollPhysics(),
           controller: controller,
           children: <Widget>[
-            TopPost(),
+            Tryout(),
             Search(),
           ],
         ),
